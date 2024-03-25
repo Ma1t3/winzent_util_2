@@ -20,8 +20,8 @@ class WinzentMAS:
 
     def __init__(
             self, ttl, time_to_sleep, grid_json: str, send_message_paths: bool, ethics_score_config,
-            use_consumer_ethics_score,
-            use_producer_ethics_score,
+            use_ethics_score_as_negotiator ,
+            use_ethics_score_as_contributor ,
             request_processing_waiting_time,
             reply_processing_waiting_time,
     ) -> None:
@@ -40,8 +40,8 @@ class WinzentMAS:
         self.graph = nx.DiGraph()
         self.agent_types = {}
         self.index_zero_counter = 0
-        self.use_consumer_ethics_score = use_consumer_ethics_score
-        self.use_producer_ethics_score = use_producer_ethics_score
+        self.use_ethics_score_as_negotiator = use_ethics_score_as_negotiator
+        self.use_ethics_score_as_contributor = use_ethics_score_as_contributor
         self.request_processing_waiting_time = request_processing_waiting_time
         self.reply_processing_waiting_time = reply_processing_waiting_time
         self.set_agent_types()
@@ -108,8 +108,8 @@ class WinzentMAS:
                 time_to_sleep=self.time_to_sleep,
                 send_message_paths=self.send_message_paths,
                 ethics_score=self._assign_ethics_score(self._net[elem_type].at[index, "name"], index),
-                use_consumer_ethics_score=self.use_consumer_ethics_score,
-                use_producer_ethics_score=self.use_producer_ethics_score,
+                use_ethics_score_as_negotiator =self.use_ethics_score_as_negotiator ,
+                use_ethics_score_as_contributor=self.use_ethics_score_as_contributor,
                 request_processing_waiting_time=self.request_processing_waiting_time,
                 reply_processing_waiting_time=self.reply_processing_waiting_time,
             )
