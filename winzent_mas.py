@@ -20,8 +20,8 @@ class WinzentMAS:
 
     def __init__(
             self, ttl, time_to_sleep, grid_json: str, send_message_paths: bool, ethics_score_config,
-            use_ethics_score_as_negotiator ,
-            use_ethics_score_as_contributor ,
+            use_ethics_score_as_negotiator,
+            use_ethics_score_as_contributor,
             request_processing_waiting_time,
             reply_processing_waiting_time,
     ) -> None:
@@ -90,7 +90,7 @@ class WinzentMAS:
         return None
 
     def _create_agent(self, elem_type, index):
-        if not self.use_consumer_ethics_score and not self.use_producer_ethics_score:
+        if not self.use_ethics_score_as_negotiator and not self.use_ethics_score_as_contributor:
             return WinzentBaseAgent(
                 container=self._container,
                 elem_type=elem_type,
@@ -108,7 +108,7 @@ class WinzentMAS:
                 time_to_sleep=self.time_to_sleep,
                 send_message_paths=self.send_message_paths,
                 ethics_score=self._assign_ethics_score(self._net[elem_type].at[index, "name"], index),
-                use_ethics_score_as_negotiator =self.use_ethics_score_as_negotiator ,
+                use_ethics_score_as_negotiator =self.use_ethics_score_as_negotiator,
                 use_ethics_score_as_contributor=self.use_ethics_score_as_contributor,
                 request_processing_waiting_time=self.request_processing_waiting_time,
                 reply_processing_waiting_time=self.reply_processing_waiting_time,
