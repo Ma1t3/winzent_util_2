@@ -298,8 +298,8 @@ class WinzentMuscle(Muscle):
                     grid_json=grid_json,
                     send_message_paths=self.send_message_paths,
                     ethics_score_config = self.ethics_score_config,
-                    use_consumer_ethics_score=self.use_consumer_ethics_score,
-                    use_producer_ethics_score=self.use_producer_ethics_score,
+                    use_ethics_score_as_negotiator=self.use_ethics_score_as_negotiator,
+                    use_ethics_score_as_contributor=self.use_ethics_score_as_contributor,
                     request_processing_waiting_time=self.request_processing_waiting_time,
                     reply_processing_waiting_time=self.reply_processing_waiting_time,
                 )
