@@ -148,7 +148,7 @@ class WinzentMuscle(Muscle):
                         )
                         await agent.start_negotiation(
                             start_dates=time_span,
-                            value=math.ceil(
+                            values=math.ceil(
                                 sensor.sensor_value * self.factor_mw
                             ),
                         )
