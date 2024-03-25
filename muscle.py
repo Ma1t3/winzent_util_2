@@ -147,7 +147,7 @@ class WinzentMuscle(Muscle):
                             f"Start negotiation for {agent.aid} with value {math.ceil(sensor.sensor_value * self.factor_mw)}"
                         )
                         await agent.start_negotiation(
-                            ts=time_span,
+                            start_dates=time_span,
                             value=math.ceil(
                                 sensor.sensor_value * self.factor_mw
                             ),
