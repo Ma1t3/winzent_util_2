@@ -136,7 +136,7 @@ class WinzentMuscle(Muscle):
     async def run_negotiations(self, sensors):
         self.messages_sent_in_step = 0
         agents_with_started_negotiation = []
-        time_span = [self.time, self.time + self.step_size]
+        time_span = [self.time]
         # start a negotiation for every load with the new value
         for sensor, (sensor_type, agent) in zip(sensors, self.sensor_mapping):
             if sensor_type == "p_mw" and agent is not None:
