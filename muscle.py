@@ -182,9 +182,9 @@ class WinzentMuscle(Muscle):
                         agents_with_started_negotiation.append(agent)
                         # restart the negotiation with the missing value
                         await agent.start_negotiation(
-                            ts=time_span,
-                            value=self.rounded_load_values[agent.aid]
-                                  - agent_result_sum,
+                            start_dates=time_span,
+                            values=[self.rounded_load_values[agent.aid]
+                                    - agent_result_sum],
                         )
                         logger.debug(
                             f"{agent.aid} restarted negotiation for value "
@@ -204,7 +204,8 @@ class WinzentMuscle(Muscle):
                     agent.ethics_score = self.calculate_new_ethics_score(negotiation_successful, agent.ethics_score)
                     self.save_ethics_score_development(self.ethics_score_list, agent, negotiation_successful)
             except asyncio.TimeoutError:
-                logger.error(f"{agent.aid} could not finish its negotiation in time. No restart permission can be given.")
+                logger.error(
+                    f"{agent.aid} could not finish its negotiation in time. No restart permission can be given.")
                 agent.ethics_score = self.calculate_new_ethics_score(False, agent.ethics_score)
                 self.save_ethics_score_development(self.ethics_score_list, agent, False)
         logger.info(f"ethics_scores -->{self.ethics_score_list}")
@@ -255,7 +256,8 @@ class WinzentMuscle(Muscle):
                         f"final solution: {self.final_solution[agent.aid]} and initial generator values {self.initial_generator_values[agent.aid]}; actuator value = {value}"
                     )
                     if value > 1:
-                        logger.info(f"final solution: {self.final_solution[agent.aid]} and initial generator values {self.initial_generator_values[agent.aid]}; actuator value = {value}")
+                        logger.info(
+                            f"final solution: {self.final_solution[agent.aid]} and initial generator values {self.initial_generator_values[agent.aid]}; actuator value = {value}")
                         value = 1
                         logger.info(
                             "WARNING: Invalid Winzent result detected."
@@ -297,7 +299,7 @@ class WinzentMuscle(Muscle):
                     time_to_sleep=self.time_to_sleep,
                     grid_json=grid_json,
                     send_message_paths=self.send_message_paths,
-                    ethics_score_config = self.ethics_score_config,
+                    ethics_score_config=self.ethics_score_config,
                     use_ethics_score_as_negotiator=self.use_ethics_score_as_negotiator,
                     use_ethics_score_as_contributor=self.use_ethics_score_as_contributor,
                     request_processing_waiting_time=self.request_processing_waiting_time,
@@ -400,7 +402,8 @@ class WinzentMuscle(Muscle):
         print(f"save ethics score from {agent.aid}")
         ethics_score_tiers = list(ethics_score_list.keys())
         if success == False and agent.ethics_score >= ethics_score_tiers[0]:
-            logger.info(f"{agent.aid}: High priority target not supplied.\n Solution is {agent.result} and target supply is {self.rounded_load_values[agent.aid]}")
+            logger.info(
+                f"{agent.aid}: High priority target not supplied.\n Solution is {agent.result} and target supply is {self.rounded_load_values[agent.aid]}")
         for tier in ethics_score_tiers:
             if tier <= agent.ethics_score < tier + 1.0:
                 ethics_score_list[tier][0] = ethics_score_list[tier][0] + agent.ethics_score
