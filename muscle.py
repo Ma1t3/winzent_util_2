@@ -38,7 +38,7 @@ class WinzentMuscle(Muscle):
         self.calc_ethics_score_params()
 
         self.initialized = False
-        self.time = 0
+        self.time = self.step_size
         self.winzent_mas: Optional[WinzentMAS] = None
         # mapping: sensor list to (type, agent)
         self.sensor_mapping: List[
